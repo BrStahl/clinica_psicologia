@@ -8,6 +8,7 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import TherapyForm from "./components/TherapyForm";
 import { AnimatePresence } from "motion/react";
+import { Analytics } from "@vercel/analytics/react";
 
 export default function App() {
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -27,6 +28,8 @@ export default function App() {
       <AnimatePresence>
         {isFormOpen && <TherapyForm onClose={() => setIsFormOpen(false)} />}
       </AnimatePresence>
+      
+      <Analytics />
     </div>
   );
 }
