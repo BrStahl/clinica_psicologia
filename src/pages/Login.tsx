@@ -6,6 +6,8 @@ import Navbar from "../components/Navbar";
 import { LogIn, ShieldAlert } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
+import { ALLOWED_ADMIN_EMAILS } from "../constants";
+
 export default function Login() {
   const [user, setUser] = useState<User | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -13,17 +15,17 @@ export default function Login() {
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  const ALLOWED_EMAIL = "JAStahl56@gmail.com"; 
-
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (u) => {
       setUser(u);
       if (u) {
-        if (u.email === ALLOWED_EMAIL) {
+        console.log("Checking admin access for:", u.email);
+        const emailLower = u.email?.toLowerCase();
+        if (emailLower && ALLOWED_ADMIN_EMAILS.map(e => e.toLowerCase()).includes(emailLower)) {
           setIsAdmin(true);
           navigate("/admin");
         } else {
-          setError("Acesso restrito. Sua conta não tem permissão de administrador.");
+          setError(`Acesso restrito. O e-mail ${u.email} não tem permissão de administrador.`);
           await auth.signOut();
         }
       }

@@ -9,6 +9,8 @@ import { useNavigate, Link } from "react-router-dom";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 
+import { ALLOWED_ADMIN_EMAILS } from "../constants";
+
 export default function AdminPage() {
   const [user, setUser] = useState<User | null>(null);
   const [posts, setPosts] = useState<BlogPost[]>([]);
@@ -17,7 +19,10 @@ export default function AdminPage() {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (u) => {
-      if (!u || u.email !== "JAStahl56@gmail.com") {
+      const emailLower = u?.email?.toLowerCase();
+      const isAllowed = emailLower && ALLOWED_ADMIN_EMAILS.map(e => e.toLowerCase()).includes(emailLower);
+      
+      if (!u || !isAllowed) {
         navigate("/login");
       } else {
         setUser(u);

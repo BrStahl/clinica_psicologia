@@ -19,6 +19,8 @@ const slugify = (text: string) => {
     .trim();
 };
 
+import { ALLOWED_ADMIN_EMAILS } from "../constants";
+
 export default function PostEditorPage() {
   const { id } = useParams<{ id?: string }>();
   const navigate = useNavigate();
@@ -35,7 +37,10 @@ export default function PostEditorPage() {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (u) => {
-      if (!u || u.email !== "JAStahl56@gmail.com") {
+      const emailLower = u?.email?.toLowerCase();
+      const isAllowed = emailLower && ALLOWED_ADMIN_EMAILS.map(e => e.toLowerCase()).includes(emailLower);
+      
+      if (!u || !isAllowed) {
         navigate("/login");
       } else {
         if (id) {

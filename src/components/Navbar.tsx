@@ -32,12 +32,22 @@ export default function Navbar({ onOpenForm }: NavbarProps) {
     <aside className="w-72 bg-white border-r border-[#EDEDED] p-10 flex flex-col justify-between h-screen fixed left-0 top-0 overflow-y-auto hidden md:flex">
       <div className="brand">
         <Link to="/" className="block mb-10 group">
-          <h1 className="font-serif text-[22px] text-brand-primary leading-tight mb-1 group-hover:text-brand-accent transition-colors">
-            Michele Cristina Braz da Silva
-          </h1>
-          <p className="text-[11px] uppercase tracking-[2px] text-brand-accent font-bold">
-            Psicóloga Clínica
-          </p>
+          <div className="flex items-center gap-3 mb-4">
+            <img 
+              src="/logo.png" 
+              alt="Logo Psicóloga Michele Braz" 
+              className="w-10 h-10 object-contain rounded-full bg-brand-soft p-1 group-hover:scale-105 transition-transform"
+              referrerPolicy="no-referrer"
+            />
+            <div>
+              <h1 className="font-serif text-[18px] lg:text-[20px] text-brand-primary leading-tight group-hover:text-brand-accent transition-colors">
+                Michele Cristina Braz da Silva
+              </h1>
+              <p className="text-[10px] uppercase tracking-[2px] text-brand-accent font-bold">
+                Psicóloga Clínica
+              </p>
+            </div>
+          </div>
         </Link>
 
         <nav>
