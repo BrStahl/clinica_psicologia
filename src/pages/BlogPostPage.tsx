@@ -3,12 +3,12 @@ import { useParams, Link } from "react-router-dom";
 import { collection, query, where, getDocs, limit } from "firebase/firestore";
 import { db } from "../lib/firebase";
 import { BlogPost } from "../types";
-import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { ChevronLeft, Calendar, Share2 } from "lucide-react";
 import ReactMarkdown from "react-markdown";
+import MainLayout from "../components/MainLayout";
 
 export default function BlogPostPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -47,19 +47,19 @@ export default function BlogPostPage() {
 
   if (!post) {
     return (
-      <div className="min-h-screen bg-brand-soft flex flex-col items-center justify-center p-6 text-center">
-        <h1 className="text-3xl font-serif text-brand-secondary mb-4">Post não encontrado</h1>
-        <Link to="/blog" className="text-brand-primary flex items-center gap-2 font-bold uppercase tracking-widest text-xs">
-          <ChevronLeft size={16} /> Voltar ao Blog
-        </Link>
-      </div>
+      <MainLayout>
+        <div className="flex-1 flex flex-col items-center justify-center p-6 text-center">
+          <h1 className="text-3xl font-serif text-brand-secondary mb-4">Post não encontrado</h1>
+          <Link to="/blog" className="text-brand-primary flex items-center gap-2 font-bold uppercase tracking-widest text-xs">
+            <ChevronLeft size={16} /> Voltar ao Blog
+          </Link>
+        </div>
+      </MainLayout>
     );
   }
 
   return (
-    <div className="min-h-screen bg-brand-soft flex">
-      <Navbar onOpenForm={() => {}} />
-      <main className="flex-1 md:ml-72 flex flex-col min-h-screen">
+    <MainLayout>
         <article className="max-w-4xl mx-auto w-full p-6 lg:p-14 mb-20">
           <Link 
             to="/blog" 
@@ -113,7 +113,6 @@ export default function BlogPostPage() {
           </footer>
         </article>
         <Footer />
-      </main>
-    </div>
+    </MainLayout>
   );
 }

@@ -1,8 +1,7 @@
-interface HeroProps {
-  onOpenForm: () => void;
-}
+import { useUI } from "../context/UIContext";
 
-export default function Hero({ onOpenForm }: HeroProps) {
+export default function Hero() {
+  const { openForm } = useUI();
   return (
     <section id="home" className="p-10 lg:p-14 bg-brand-soft relative overflow-hidden">
       {/* Decorative Gradient Glows */}
@@ -25,7 +24,7 @@ export default function Hero({ onOpenForm }: HeroProps) {
             </p>
             <div className="flex flex-wrap gap-4">
               <button
-                onClick={onOpenForm}
+                onClick={openForm}
                 className="bg-brand-primary text-white px-8 py-3.5 rounded-lg font-bold hover:bg-brand-secondary transition-all shadow-lg shadow-brand-primary/30 text-sm uppercase tracking-wide cursor-pointer flex items-center gap-2"
               >
                 Começar Terapia

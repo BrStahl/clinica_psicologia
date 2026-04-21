@@ -6,19 +6,23 @@ import Login from "./pages/Login";
 import AdminPage from "./pages/AdminPage";
 import PostEditorPage from "./pages/PostEditorPage";
 
+import { UIProvider } from "./context/UIContext";
+
 export default function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/blog" element={<BlogListing />} />
-        <Route path="/blog/:slug" element={<BlogPostPage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/admin" element={<AdminPage />} />
-        <Route path="/admin/new" element={<PostEditorPage />} />
-        <Route path="/admin/edit/:id" element={<PostEditorPage />} />
-      </Routes>
-    </Router>
+    <UIProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/blog" element={<BlogListing />} />
+          <Route path="/blog/:slug" element={<BlogPostPage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/admin/new" element={<PostEditorPage />} />
+          <Route path="/admin/edit/:id" element={<PostEditorPage />} />
+        </Routes>
+      </Router>
+    </UIProvider>
   );
 }
 

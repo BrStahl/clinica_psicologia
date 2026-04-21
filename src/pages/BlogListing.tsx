@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { collection, query, where, orderBy, getDocs } from "firebase/firestore";
 import { db } from "../lib/firebase";
 import { BlogPost } from "../types";
-import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { BookOpen, Calendar, Clock, BookText } from "lucide-react";
 import { motion } from "motion/react";
+import MainLayout from "../components/MainLayout";
 
 export default function BlogListing() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
@@ -38,9 +38,7 @@ export default function BlogListing() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-brand-soft flex">
-      <Navbar onOpenForm={() => {}} />
-      <main className="flex-1 md:ml-72 flex flex-col min-h-screen">
+    <MainLayout>
         <section className="p-10 lg:p-14">
           <div className="max-w-6xl">
             <header className="mb-12">
@@ -110,8 +108,7 @@ export default function BlogListing() {
           </div>
         </section>
         <Footer />
-      </main>
-    </div>
+    </MainLayout>
   );
 }
 
