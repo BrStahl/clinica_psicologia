@@ -1,0 +1,42 @@
+{
+  "entities": {
+    "BlogPost": {
+      "title": "Blog Post",
+      "description": "A dynamic blog post written by the psychologist.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "description": "The title of the post." },
+        "slug": { "type": "string", "description": "URL-friendly version of the title." },
+        "content": { "type": "string", "description": "The full body of the post in Markdown format." },
+        "excerpt": { "type": "string", "description": "A short summary for previews." },
+        "imageUrl": { "type": "string", "description": "Header image for the post." },
+        "authorId": { "type": "string", "description": "The UID of the administrator who wrote the post." },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" },
+        "status": { "type": "string", "enum": ["draft", "published"] }
+      },
+      "required": ["title", "slug", "content", "authorId", "createdAt", "status"]
+    },
+    "Admin": {
+      "title": "Administrator",
+      "description": "User with permission to manage the blog.",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin"] }
+      },
+      "required": ["email"]
+    }
+  },
+  "firestore": {
+    "posts": {
+      "schema": "BlogPost",
+      "description": "Collection of all blog articles."
+    },
+    "admins": {
+      "schema": "Admin",
+      "description": "Users authorized to access the admin panel."
+    }
+  }
+}

@@ -1,0 +1,68 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 0. Global Safety Net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // --- Helpers ---
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    
+    function isAdmin() {
+      return isSignedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // --- BlogPost Validation ---
+    function isValidBlogPost(data) {
+      return data.title is string && data.title.size() > 0 && data.title.size() <= 200
+        && data.slug is string && data.slug.size() > 0 && data.slug.size() <= 200
+        && data.content is string && data.content.size() > 0 && data.content.size() <= 50000
+        && (data.imageUrl == null || (data.imageUrl is string && data.imageUrl.size() <= 1000))
+        && (data.excerpt == null || (data.excerpt is string && data.excerpt.size() <= 500))
+        && data.authorId == request.auth.uid
+        && data.status in ['draft', 'published']
+        && data.createdAt == (resource == null ? request.time : existing().createdAt)
+        && data.updatedAt == request.time;
+    }
+
+    // --- Collection Routes ---
+
+    // Admins Collection: Read-only for admins (creation happens via console/initial script)
+    match /admins/{adminId} {
+      allow read: if isAdmin();
+      allow write: if false; // Only manageable via Firebase Console or restricted scripts
+    }
+
+    // Blog Posts Collection
+    match /posts/{postId} {
+      allow get: if (existing().status == 'published') || isAdmin();
+      allow list: if (existing().status == 'published') || isAdmin();
+      
+      allow create: if isAdmin() 
+        && isValidId(postId)
+        && isValidBlogPost(incoming())
+        && incoming().createdAt == request.time;
+        
+      allow update: if isAdmin()
+        && isValidBlogPost(incoming())
+        && incoming().createdAt == existing().createdAt; // Immutable creation date
+        
+      allow delete: if isAdmin();
+    }
+  }
+}
