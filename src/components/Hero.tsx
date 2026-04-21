@@ -41,8 +41,8 @@ export default function Hero() {
           <div className="lg:col-span-2">
             <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl border-8 border-white group">
               <img
-                src="https://picsum.photos/seed/psychology-office/800/1000"
-                alt="Psicologia Clínica"
+                src="/foto-perfil.jpg"
+                alt="Psicóloga Michele Braz"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 referrerPolicy="no-referrer"
               />
