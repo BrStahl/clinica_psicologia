@@ -14,9 +14,15 @@ export default function Footer() {
             </p>
           </div>
           
-          <div className="text-[11px] text-brand-light font-medium">
-            © {currentYear} Todos os direitos reservados.
+          <div className="flex flex-col items-center md:items-end gap-2">
+            <div className="text-[11px] text-brand-light font-medium">
+              © {currentYear} Todos os direitos reservados.
+            </div>
+            <a href="/login" className="text-[9px] text-brand-accent/50 hover:text-brand-primary transition-colors uppercase tracking-widest font-bold">
+              Área Restrita
+            </a>
           </div>
+
         </div>
       </div>
     </footer>

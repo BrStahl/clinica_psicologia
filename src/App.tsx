@@ -1,37 +1,28 @@
-import { useState } from "react";
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import About from "./components/About";
-import Services from "./components/Services";
-import Testimonials from "./components/Testimonials";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
-import TherapyForm from "./components/TherapyForm";
-import { AnimatePresence } from "motion/react";
-import { Analytics } from "@vercel/analytics/react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import BlogListing from "./pages/BlogListing";
+import BlogPostPage from "./pages/BlogPostPage";
+import Login from "./pages/Login";
+import AdminPage from "./pages/AdminPage";
+import PostEditorPage from "./pages/PostEditorPage";
 
 export default function App() {
-  const [isFormOpen, setIsFormOpen] = useState(false);
-
   return (
-    <div className="min-h-screen bg-brand-soft flex">
-      <Navbar onOpenForm={() => setIsFormOpen(true)} />
-      <main className="flex-1 md:ml-72 flex flex-col min-h-screen">
-        <Hero onOpenForm={() => setIsFormOpen(true)} />
-        <About />
-        <Services />
-        <Testimonials />
-        <Contact />
-        <Footer />
-      </main>
-
-      <AnimatePresence>
-        {isFormOpen && <TherapyForm onClose={() => setIsFormOpen(false)} />}
-      </AnimatePresence>
-      
-      <Analytics />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/blog" element={<BlogListing />} />
+        <Route path="/blog/:slug" element={<BlogPostPage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/admin" element={<AdminPage />} />
+        <Route path="/admin/new" element={<PostEditorPage />} />
+        <Route path="/admin/edit/:id" element={<PostEditorPage />} />
+      </Routes>
+    </Router>
   );
 }
+
+
+
 
 
