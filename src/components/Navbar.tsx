@@ -65,7 +65,11 @@ export default function Navbar({ onOpenForm }: NavbarProps) {
   return (
     <header className="w-full bg-white/95 backdrop-blur-sm border-b border-[#EDEDED] fixed top-0 left-0 z-[100] h-20">
       <div className="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-3 group shrink-0">
+        <Link 
+          to="/" 
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          className="flex items-center gap-3 group shrink-0"
+        >
           <div>
             <h1 className="font-serif text-[16px] lg:text-[18px] text-brand-primary leading-tight group-hover:text-brand-accent transition-colors">
               Michele Cristina Braz da Silva

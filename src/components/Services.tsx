@@ -44,7 +44,7 @@ export default function Services() {
   return (
     <section id="services" className="p-10 lg:p-14 bg-brand-soft scroll-mt-20">
       <div className="max-w-6xl mx-auto">
-        <div className="mb-16 text-center lg:text-left">
+        <div className="mb-16 text-left">
             <h2 className="text-brand-primary font-bold uppercase tracking-[3px] text-sm mb-4">Como posso ajudar</h2>
             <h3 className="text-4xl font-serif text-brand-secondary">Especialidades de Atendimento</h3>
         </div>

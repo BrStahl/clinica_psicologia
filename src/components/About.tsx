@@ -44,7 +44,7 @@ export default function About() {
   }, []);
 
   return (
-    <section id="about" className="p-10 lg:p-14 bg-brand-soft pt-24">
+    <section id="about" className="p-10 lg:p-14 bg-brand-soft pt-24 text-left">
       <div className="max-w-6xl mx-auto">
         {/* Profile and Bio Row */}
         <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
