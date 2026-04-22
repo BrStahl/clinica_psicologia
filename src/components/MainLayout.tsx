@@ -11,11 +11,11 @@ export default function MainLayout({ children }: MainLayoutProps) {
   const { isFormOpen, openForm, closeForm } = useUI();
 
   return (
-    <div className="min-h-screen bg-brand-soft flex">
+    <div className="min-h-screen bg-brand-soft">
       <Navbar onOpenForm={openForm} />
-      <div className="flex-1 md:ml-72 flex flex-col min-h-screen">
+      <main className="pt-20 flex flex-col min-h-screen">
         {children}
-      </div>
+      </main>
 
       <AnimatePresence>
         {isFormOpen && <TherapyForm onClose={closeForm} />}

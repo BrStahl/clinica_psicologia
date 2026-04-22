@@ -1,12 +1,13 @@
-import { Phone, MapPin, PlusCircle, BookText } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Phone, MapPin, PlusCircle, BookText, Menu, X as CloseIcon } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
 const navLinks = [
-  { name: "Sobre Mim", href: "/#about" },
-  { name: "Serviços", href: "/#services" },
-  { name: "Depoimentos", href: "/#testimonials" },
-  { name: "Blog", href: "/blog", isRoute: true },
-  { name: "Contato", href: "/#contact" },
+  { name: "Sobre Mim", href: "/#about", id: "about" },
+  { name: "Serviços", href: "/#services", id: "services" },
+  { name: "Depoimentos", href: "/#testimonials", id: "testimonials" },
+  { name: "Blog", href: "/blog", isRoute: true, id: "blog" },
+  { name: "Contato", href: "/#contact", id: "contact" },
 ];
 
 interface NavbarProps {
@@ -15,9 +16,42 @@ interface NavbarProps {
 
 export default function Navbar({ onOpenForm }: NavbarProps) {
   const location = useLocation();
+  const [activeSection, setActiveSection] = useState("");
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    if (location.pathname !== "/") {
+      setActiveSection(location.pathname.includes("/blog") ? "blog" : "");
+      return;
+    }
+
+    const handleScroll = () => {
+      const sections = navLinks
+        .filter(l => !l.isRoute)
+        .map(l => document.getElementById(l.id || ""));
+      
+      const scrollPosition = window.scrollY + 100;
+
+      for (const section of sections) {
+        if (!section) continue;
+        const top = section.offsetTop;
+        const height = section.offsetHeight;
+        if (scrollPosition >= top && scrollPosition < top + height) {
+          setActiveSection(section.id);
+          return;
+        }
+      }
+      
+      if (window.scrollY < 100) setActiveSection("");
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [location.pathname]);
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string, isRoute?: boolean) => {
     if (isRoute) return;
+    setIsMobileMenuOpen(false);
     
     if (location.pathname === "/") {
       const id = href.replace("/#", "");
@@ -29,76 +63,112 @@ export default function Navbar({ onOpenForm }: NavbarProps) {
   };
 
   return (
-    <aside className="w-72 bg-white border-r border-[#EDEDED] p-10 flex flex-col justify-between h-screen fixed left-0 top-0 overflow-y-auto hidden md:flex">
-      <div className="brand">
-        <Link to="/" className="block mb-10 group">
-          <div className="flex items-center gap-3 mb-4">
-            <img 
-              src="/logo.png" 
-              alt="Logo Psicóloga Michele Braz" 
-              className="w-10 h-10 object-contain rounded-full bg-brand-soft p-1 group-hover:scale-105 transition-transform"
-              referrerPolicy="no-referrer"
-            />
-            <div>
-              <h1 className="font-serif text-[18px] lg:text-[20px] text-brand-primary leading-tight group-hover:text-brand-accent transition-colors">
-                Michele Cristina Braz da Silva
-              </h1>
-              <p className="text-[10px] uppercase tracking-[2px] text-brand-accent font-bold">
-                Psicóloga Clínica
-              </p>
-            </div>
+    <header className="w-full bg-white/95 backdrop-blur-sm border-b border-[#EDEDED] fixed top-0 left-0 z-[100] h-20">
+      <div className="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
+        <Link to="/" className="flex items-center gap-3 group shrink-0">
+          <div>
+            <h1 className="font-serif text-[16px] lg:text-[18px] text-brand-primary leading-tight group-hover:text-brand-accent transition-colors">
+              Michele Cristina Braz da Silva
+            </h1>
+            <p className="text-[9px] uppercase tracking-[2px] text-brand-accent font-bold">
+              Psicóloga e Terapeuta de Casais
+            </p>
           </div>
         </Link>
 
-        <nav>
-          <ul className="space-y-5">
+        {/* Desktop Nav */}
+        <nav className="hidden lg:block absolute left-1/2 -translate-x-1/2">
+          <ul className="flex items-center gap-8">
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.id;
+              return (
+                <li key={link.name}>
+                  {link.isRoute ? (
+                    <Link
+                      to={link.href}
+                      className={`text-sm font-medium transition-all relative py-2 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-brand-primary after:transition-all hover:text-brand-primary hover:after:w-full ${
+                        isActive ? "text-brand-primary after:w-full" : "text-brand-light after:w-0"
+                      }`}
+                    >
+                      {link.name}
+                    </Link>
+                  ) : (
+                    <a
+                      href={link.href}
+                      onClick={(e) => handleLinkClick(e, link.href)}
+                      className={`text-sm font-medium transition-all relative py-2 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-brand-primary after:transition-all hover:text-brand-primary hover:after:w-full ${
+                        isActive ? "text-brand-primary after:w-full" : "text-brand-light after:w-0"
+                      }`}
+                    >
+                      {link.name}
+                    </a>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+
+        <div className="flex items-center gap-4">
+          <button 
+            onClick={onOpenForm}
+            className="hidden md:flex items-center justify-center gap-2 px-6 py-2.5 bg-brand-primary text-white rounded-lg text-xs font-bold uppercase tracking-wider hover:bg-brand-secondary transition-all shadow-lg shadow-brand-primary/10 cursor-pointer"
+          >
+            <PlusCircle size={14} />
+            Agendar Consulta
+          </button>
+          
+          {/* Mobile Menu Toggle */}
+          <button 
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="lg:hidden p-2 text-brand-primary"
+          >
+            {isMobileMenuOpen ? <CloseIcon size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu Mobile */}
+      {isMobileMenuOpen && (
+        <div className="lg:hidden absolute top-20 left-0 w-full bg-white border-b border-[#EDEDED] py-6 px-6 shadow-xl animate-in fade-in slide-in-from-top-4">
+          <ul className="flex flex-col gap-6">
             {navLinks.map((link) => (
-              <li key={link.name} className="flex items-center group">
+              <li key={link.name}>
                 {link.isRoute ? (
                   <Link
                     to={link.href}
-                    className="text-sm font-medium text-brand-light group-hover:text-brand-primary flex items-center transition-all"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`block text-sm font-medium ${activeSection === link.id ? "text-brand-primary" : "text-brand-light"}`}
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-transparent border border-brand-accent mr-3 group-hover:bg-brand-accent transition-all"></span>
                     {link.name}
                   </Link>
                 ) : (
                   <a
                     href={link.href}
                     onClick={(e) => handleLinkClick(e, link.href)}
-                    className="text-sm font-medium text-brand-light group-hover:text-brand-primary flex items-center transition-all"
+                    className={`block text-sm font-medium ${activeSection === link.id ? "text-brand-primary" : "text-brand-light"}`}
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-transparent border border-brand-accent mr-3 group-hover:bg-brand-accent transition-all"></span>
                     {link.name}
                   </a>
                 )}
               </li>
             ))}
+            <li className="pt-4 mt-4 border-t border-[#F0F0F0]">
+              <button 
+                onClick={() => {
+                  onOpenForm();
+                  setIsMobileMenuOpen(false);
+                }}
+                className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-brand-primary text-white rounded-lg text-xs font-bold uppercase tracking-wider"
+              >
+                <PlusCircle size={14} />
+                Agendar Consulta
+              </button>
+            </li>
           </ul>
-        </nav>
-      </div>
-
-
-      <div className="contact-info">
-        <div className="flex items-start gap-2 mb-4 p-3 bg-brand-soft rounded-lg border-l-2 border-brand-accent">
-          <MapPin size={16} className="text-brand-accent shrink-0 mt-0.5" />
-          <div className="text-[12px] leading-snug text-brand-light">
-            <strong className="text-brand-secondary block mb-0.5">Consultório Particular</strong>
-            R. Farmaceutico Jacob Fanelli 139<br />
-            Vila Sao Joao, Limeira - SP<br />
-            CEP 13480-720
-          </div>
         </div>
-        
-        <button 
-          onClick={onOpenForm}
-          className="flex items-center justify-center gap-2 w-full py-3 bg-brand-primary text-white rounded-lg text-xs font-bold uppercase tracking-wider hover:bg-brand-secondary transition-all shadow-lg shadow-brand-primary/10 cursor-pointer"
-        >
-          <PlusCircle size={14} />
-          Agendar Consulta
-        </button>
-      </div>
-    </aside>
+      )}
+    </header>
   );
 }
 

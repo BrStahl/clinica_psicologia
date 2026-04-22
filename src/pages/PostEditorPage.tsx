@@ -117,10 +117,10 @@ export default function PostEditorPage() {
   if (loading) return null;
 
   return (
-    <div className="min-h-screen bg-brand-soft flex">
+    <div className="min-h-screen bg-brand-soft">
       <Navbar onOpenForm={() => {}} />
-      <main className="flex-1 md:ml-72 flex flex-col min-h-screen">
-        <header className="bg-white border-b border-[#F0F0F0] px-10 py-6 flex justify-between items-center sticky top-0 z-20">
+      <main className="pt-20 flex flex-col min-h-screen">
+        <header className="bg-white border-b border-[#F0F0F0] px-10 py-6 flex justify-between items-center sticky top-20 z-20">
           <div className="flex items-center gap-6">
             <Link to="/admin" className="p-2 text-brand-light hover:text-brand-primary transition-colors">
               <ChevronLeft size={20} />

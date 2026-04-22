@@ -68,9 +68,9 @@ export default function AdminPage() {
   if (!user) return null;
 
   return (
-    <div className="min-h-screen bg-brand-soft flex">
+    <div className="min-h-screen bg-brand-soft">
       <Navbar onOpenForm={() => {}} />
-      <main className="flex-1 md:ml-72 flex flex-col min-h-screen">
+      <main className="pt-20 flex flex-col min-h-screen">
         <header className="bg-white border-b border-[#F0F0F0] px-10 py-6 flex justify-between items-center">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-brand-soft text-brand-primary rounded-lg">

@@ -44,45 +44,90 @@ export default function About() {
   }, []);
 
   return (
-    <section id="about" className="p-10 lg:p-14 bg-brand-soft">
-      <div className="max-w-6xl">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="bg-white p-10 rounded-xl shadow-card h-full">
-            <h2 className="text-brand-primary font-bold uppercase tracking-[2px] text-xs mb-6">Sobre Mim</h2>
-            <p className="text-brand-light leading-relaxed mb-6 italic text-[15px]">
-              Sou Michele, psicóloga clínica, e é um prazer receber você em meu perfil. Tenho como propósito desenvolver pessoas, e foi na Psicologia que encontrei o caminho para colocar esse objetivo em prática.
-            </p>
-            <p className="text-brand-light leading-relaxed mb-6 text-[14px]">
-              Sou formada em Psicologia, com especialização em <b>Neuropsicologia</b> e <b>Avaliação Psicológica</b>, e atuo a partir da <b>Terapia Cognitivo-Comportamental (TCC)</b>, com ênfase nos transtornos depressivos e ansiosos.
-            </p>
+    <section id="about" className="p-10 lg:p-14 bg-brand-soft pt-24">
+      <div className="max-w-6xl mx-auto">
+        {/* Profile and Bio Row */}
+        <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
+          <div className="order-2 lg:order-1">
+            <h2 className="text-brand-primary font-bold uppercase tracking-[3px] text-xs mb-4">Trajetória Profissional</h2>
+            <h3 className="text-4xl font-serif text-brand-secondary mb-8">Dra. Michele Braz</h3>
             
-            <div className="bg-brand-soft border-l-[3px] border-brand-accent p-4 mt-8">
-              <p className="text-xs text-brand-secondary font-medium">
-                <b>Propósito:</b> Reestruturação de pensamentos e emoções para promover mudanças significativas e construir uma melhor qualidade de vida.
+            <div className="space-y-4 text-brand-light leading-relaxed text-lg">
+              <p>
+                Sou psicóloga clínica, especialista em Neuropsicologia e Avaliação Psicológica, com atuação na abordagem Cognitivo-Comportamental (TCC). Atualmente, estou em formação em Terapia de Relacionamentos e Casais.
+              </p>
+              <p>
+                Há 5 anos atuo com foco em relacionamentos, acompanhando casais e pessoas que se sentem machucadas, incompreendidas ou presas em relações marcadas por conflitos, insegurança e distanciamento emocional.
+              </p>
+              <p>
+                Na prática clínica, vejo diariamente que é possível reconstruir relacionamentos que parecem fragilizados ou sem esperança, fortalecendo vínculos e resgatando a conexão emocional.
+              </p>
+              <p>
+                Também realizo psicoterapia individual com adolescentes e adultos, com foco em ansiedade, autoestima e dependência emocional.
+              </p>
+              <p>
+                Ofereço um atendimento acolhedor, ético e baseado em evidências, respeitando o tempo e a individualidade de cada paciente.
+                <br />
+                <span className="font-bold text-brand-secondary mt-2 inline-block">Atendimento online e presencial.</span>
               </p>
             </div>
-
-            <div className="mt-10 pt-10 border-t border-[#F0F0F0]">
-               <h3 className="text-xs uppercase tracking-[1px] text-brand-accent mb-6 font-bold">Formação & Especializações</h3>
-               <div className="space-y-6">
-                <div>
-                  <ul className="space-y-2 text-[12px] text-brand-light">
-                    {education.map((item, idx) => (
-                      <li key={idx} className="flex items-start gap-2">
-                        <div className="w-1.5 h-1.5 rounded-full bg-brand-accent mt-1 flex-shrink-0"></div>
-                        <span><b className="text-brand-secondary">{item.degree}</b> — {item.school}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+            
+            <div className="bg-brand-primary/5 p-6 mt-10 rounded-2xl border border-brand-primary/10">
+               <h4 className="flex items-center gap-2 text-brand-primary font-bold text-xs uppercase tracking-widest mb-4">
+                  <Brain size={16} /> Áreas de Atuação
+               </h4>
+               <div className="flex flex-wrap gap-2">
+                {experiences.map((item, idx) => (
+                  <span key={idx} className="bg-white text-brand-primary py-2 px-4 rounded-lg text-[11px] font-bold uppercase tracking-wider shadow-sm">
+                    {item.title}
+                  </span>
+                ))}
               </div>
             </div>
           </div>
 
-          <div className="space-y-8 h-full flex flex-col justify-center">
+          <div className="order-1 lg:order-2">
+            <div className="relative">
+              <div className="absolute -inset-4 bg-brand-accent/20 rounded-3xl -rotate-3"></div>
+              <div className="relative aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl border-[12px] border-white z-10 mx-auto max-w-sm lg:max-w-none">
+                <img 
+                  src="/foto-perfil.jpg" 
+                  alt="Dra. Michele Braz"
+                  className="w-full h-full object-cover shadow-inner"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Office and Education Row */}
+        <div className="grid lg:grid-cols-2 gap-12 items-start mt-24 pt-20 border-t border-brand-primary/10">
+          <div className="space-y-8">
+            <h3 className="text-2xl font-serif text-brand-secondary">Onde acontece o acolhimento</h3>
+            <p className="text-brand-light leading-relaxed">
+              Um ambiente preparado para oferecer sigilo, conforto e a tranquilidade necessária para o seu processo terapêutico. Localizado em Limeira-SP, o consultório é um espaço de escuta ativa e acolhimento genuíno.
+            </p>
+            
+            <div className="bg-white p-8 rounded-2xl shadow-card border border-brand-soft">
+               <h4 className="text-xs uppercase tracking-[2px] text-brand-accent mb-6 font-bold flex items-center gap-2">
+                  <GraduationCap size={16} /> Especializações & Formação
+               </h4>
+               <ul className="space-y-4 text-[13px] text-brand-light">
+                  {education.map((item, idx) => (
+                    <li key={idx} className="flex items-start gap-3 group">
+                      <div className="w-2 h-2 rounded-full bg-brand-primary/30 mt-1 transition-colors group-hover:bg-brand-primary"></div>
+                      <span><b className="text-brand-secondary">{item.degree}</b> <span className="block text-[11px] text-brand-accent mt-0.5">{item.school}</span></span>
+                    </li>
+                  ))}
+               </ul>
+            </div>
+          </div>
+
+          <div className="relative">
             {/* Carousel Section */}
             <div 
-              className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border-4 border-white group cursor-zoom-in"
+              className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl border-4 border-white group cursor-zoom-in"
               onClick={() => setIsLightboxOpen(true)}
             >
                 <div className="absolute top-4 right-4 z-20 bg-white/80 p-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity">
@@ -92,65 +137,33 @@ export default function About() {
                 <AnimatePresence mode="wait">
                   <motion.img 
                     key={currentIdx}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    transition={{ duration: 0.4 }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.5 }}
                     src={officeImages[currentIdx]} 
                     alt={`Espaço de Atendimento ${currentIdx + 1}`} 
                     className="w-full h-full object-cover"
                     referrerPolicy="no-referrer"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = `https://picsum.photos/seed/office-view-${currentIdx}/1200/900`;
-                    }}
                   />
                 </AnimatePresence>
                 
-                <div className="absolute inset-0 bg-brand-primary/5"></div>
+                <div className="absolute inset-0 bg-brand-secondary/5"></div>
                 
-                {/* Controls */}
                 <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 flex justify-between opacity-0 group-hover:opacity-100 transition-opacity z-20">
-                    <button 
-                      onClick={prevSlide}
-                      className="p-2 bg-white/90 hover:bg-white text-brand-primary rounded-full shadow-lg transition-all"
-                    >
-                        <ChevronLeft size={20} />
-                    </button>
-                    <button 
-                      onClick={nextSlide}
-                      className="p-2 bg-white/90 hover:bg-white text-brand-primary rounded-full shadow-lg transition-all"
-                    >
-                        <ChevronRight size={20} />
-                    </button>
+                    <button onClick={prevSlide} className="p-3 bg-white/90 hover:bg-white text-brand-primary rounded-full shadow-xl"><ChevronLeft size={20} /></button>
+                    <button onClick={nextSlide} className="p-3 bg-white/90 hover:bg-white text-brand-primary rounded-full shadow-xl"><ChevronRight size={20} /></button>
                 </div>
 
-                {/* Indicators */}
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3 z-20">
                     {officeImages.map((_, idx) => (
                       <button 
                         key={idx}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setCurrentIdx(idx);
-                        }}
-                        className={`w-2 h-2 rounded-full transition-all ${idx === currentIdx ? 'bg-white w-4' : 'bg-white/40'}`}
+                        onClick={(e) => { e.stopPropagation(); setCurrentIdx(idx); }}
+                        className={`w-2.5 h-2.5 rounded-full transition-all ${idx === currentIdx ? 'bg-white w-6' : 'bg-white/40'}`}
                       />
                     ))}
                 </div>
-            </div>
-
-            <div className="bg-white p-8 rounded-xl shadow-card">
-              <h4 className="text-[13px] font-bold text-brand-secondary mb-4 flex items-center gap-2 uppercase tracking-widest">
-                <Brain size={16} className="text-brand-accent" />
-                Áreas de Atuação
-              </h4>
-              <div className="flex flex-wrap gap-2">
-                {experiences.map((item, idx) => (
-                  <span key={idx} className="bg-brand-soft text-brand-primary py-2 px-4 rounded-lg text-[11px] font-bold uppercase tracking-wider border border-brand-primary/5">
-                    {item.title}
-                  </span>
-                ))}
-              </div>
             </div>
           </div>
         </div>
@@ -166,43 +179,18 @@ export default function About() {
             className="fixed inset-0 z-[200] bg-brand-secondary/95 backdrop-blur-md flex items-center justify-center p-4 lg:p-10 cursor-zoom-out"
             onClick={() => setIsLightboxOpen(false)}
           >
-            <button 
-              className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors"
-              onClick={() => setIsLightboxOpen(false)}
-            >
-              <X size={32} />
-            </button>
-
+            <button className="absolute top-8 right-8 text-white/70 hover:text-white"><X size={40} /></button>
             <div className="relative w-full max-w-6xl max-h-[85vh] flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
-               <button 
-                onClick={prevSlide}
-                className="absolute left-0 lg:-left-16 p-4 bg-white/10 hover:bg-white/20 text-white rounded-full transition-all"
-               >
-                  <ChevronLeft size={32} />
-               </button>
-
+               <button onClick={prevSlide} className="absolute left-0 lg:-left-20 p-5 bg-white/10 hover:bg-white/20 text-white rounded-full"><ChevronLeft size={40} /></button>
                <motion.img 
                   key={currentIdx}
-                  initial={{ scale: 0.9, opacity: 0 }}
+                  initial={{ scale: 0.95, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   src={officeImages[currentIdx]}
-                  className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+                  className="max-w-full max-h-full object-contain rounded-2xl shadow-2xl"
                   referrerPolicy="no-referrer"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = `https://picsum.photos/seed/office-view-${currentIdx}/1200/900`;
-                  }}
                />
-
-               <button 
-                onClick={nextSlide}
-                className="absolute right-0 lg:-right-16 p-4 bg-white/10 hover:bg-white/20 text-white rounded-full transition-all"
-               >
-                  <ChevronRight size={32} />
-               </button>
-            </div>
-            
-            <div className="absolute bottom-10 text-white/50 text-sm font-medium">
-                {currentIdx + 1} de {officeImages.length}
+               <button onClick={nextSlide} className="absolute right-0 lg:-right-20 p-5 bg-white/10 hover:bg-white/20 text-white rounded-full"><ChevronRight size={40} /></button>
             </div>
           </motion.div>
         )}
