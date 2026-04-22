@@ -75,7 +75,7 @@ export default function Navbar({ onOpenForm }: NavbarProps) {
               Michele Cristina Braz da Silva
             </h1>
             <p className="text-[9px] uppercase tracking-[2px] text-brand-accent font-bold">
-              Psicóloga e Terapeuta de Casais
+              Psicóloga & Terapeuta de Casais
             </p>
           </div>
         </Link>
