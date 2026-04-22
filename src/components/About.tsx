@@ -47,12 +47,12 @@ export default function About() {
     <section id="about" className="p-10 lg:p-14 bg-brand-soft pt-24 text-left">
       <div className="max-w-6xl mx-auto">
         {/* Profile and Bio Row */}
-        <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
-          <div className="order-2 lg:order-1">
-            <h2 className="text-brand-primary font-bold uppercase tracking-[3px] text-xs mb-4">Trajetória Profissional</h2>
-            <h3 className="text-4xl font-serif text-brand-secondary mb-8">Dra. Michele Braz</h3>
+        <div className="grid lg:grid-cols-2 gap-16 items-center mb-20 text-left">
+          <div className="order-2 lg:order-1 text-left">
+            <h2 className="text-brand-primary font-bold uppercase tracking-[3px] text-xs mb-4 text-left">Sobre Mim</h2>
+            <h3 className="text-4xl font-serif text-brand-secondary mb-8 text-left">Dra. Michele Braz</h3>
             
-            <div className="space-y-4 text-brand-light leading-relaxed text-lg">
+            <div className="space-y-4 text-brand-light leading-relaxed text-lg text-left">
               <p>
                 Sou psicóloga clínica, especialista em Neuropsicologia e Avaliação Psicológica, com atuação na abordagem Cognitivo-Comportamental (TCC). Atualmente, estou em formação em Terapia de Relacionamentos e Casais.
               </p>
@@ -102,10 +102,10 @@ export default function About() {
         </div>
 
         {/* Office and Education Row */}
-        <div className="grid lg:grid-cols-2 gap-12 items-start mt-24 pt-20 border-t border-brand-primary/10">
-          <div className="space-y-8">
-            <h3 className="text-2xl font-serif text-brand-secondary">Onde acontece o acolhimento</h3>
-            <p className="text-brand-light leading-relaxed">
+        <div className="grid lg:grid-cols-2 gap-12 items-start mt-24 pt-20 border-t border-brand-primary/10 text-left">
+          <div className="space-y-8 text-left">
+            <h3 className="text-2xl font-serif text-brand-secondary text-left">Onde acontece o acolhimento</h3>
+            <p className="text-brand-light leading-relaxed text-left">
               Um ambiente preparado para oferecer sigilo, conforto e a tranquilidade necessária para o seu processo terapêutico. Localizado em Limeira-SP, o consultório é um espaço de escuta ativa e acolhimento genuíno.
             </p>
             

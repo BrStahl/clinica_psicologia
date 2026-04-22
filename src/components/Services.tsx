@@ -7,22 +7,16 @@ export default function Services() {
 
   const services = [
     { 
-      title: "Psicoterapia de Casal", 
+      title: "Terapia de Casal", 
       shortDesc: "Auxílio na comunicação, reconstrução da confiança e fortalecimento do vínculo afetivo.",
-      fullDesc: "Atendimento psicológico para casais que desejam melhorar a comunicação, resolver conflitos, reconstruir a confiança e fortalecer o vínculo afetivo. A terapia de casal é indicada para momentos de crise, distanciamento emocional, ciúmes, dificuldades na convivência e problemas recorrentes na relação.\n\nO processo terapêutico auxilia na compreensão das dinâmicas do relacionamento, promovendo mudanças mais saudáveis e equilibradas entre o casal.",
+      fullDesc: "A terapia de casal é indicada para casais que desejam melhorar a comunicação, lidar com conflitos, reconstruir a confiança e fortalecer o vínculo.\n\nMesmo quando a relação parece desgastada ou sem solução, é possível compreender o que está acontecendo e construir novos caminhos juntos.",
       icon: <Users className="text-brand-primary" size={24} />
     },
     { 
-      title: "Psicoterapia Adulto", 
-      shortDesc: "Foco em ansiedade, depressão, autoestima e regulação emocional.",
-      fullDesc: "Atendimento psicológico para adultos com foco em ansiedade, depressão, autoestima, regulação emocional e dificuldades no dia a dia.\n\nAtravés da abordagem Cognitivo-Comportamental (TCC), o processo terapêutico auxilia na identificação de pensamentos e comportamentos que impactam o bem-estar emocional, promovendo mudanças práticas e duradouras.",
+      title: "Terapia Individual", 
+      shortDesc: "Compreensão de emoções, fortalecimento da autoestima e desenvolvimento de relações mais saudáveis.",
+      fullDesc: "A psicoterapia individual é voltada para adolescentes e adultos que desejam compreender suas emoções, fortalecer sua autoestima e desenvolver relações mais saudáveis.\n\nIndicado para:\n• Ansiedade\n• Depressão\n• Baixa autoestima\n• Dependência emocional\n• Dificuldades nos relacionamentos\n• Padrões repetitivos",
       icon: <User className="text-brand-primary" size={24} />
-    },
-    { 
-      title: "Psicoterapia Adolescente", 
-      shortDesc: "Apoio emocional para desafios da adolescência, autoestima e relações sociais.",
-      fullDesc: "Atendimento psicológico voltado para adolescentes, auxiliando em questões emocionais, comportamentais, autoestima, ansiedade, depressão e dificuldades nas relações familiares e sociais.\n\nO processo terapêutico promove o desenvolvimento emocional e o fortalecimento de habilidades para lidar com desafios dessa fase.",
-      icon: <Heart className="text-brand-primary" size={24} />
     },
     { 
       title: "Terapia Cognitivo-Comportamental", 
@@ -49,7 +43,7 @@ export default function Services() {
             <h3 className="text-4xl font-serif text-brand-secondary">Especialidades de Atendimento</h3>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, idx) => (
             <motion.div 
               key={idx}
